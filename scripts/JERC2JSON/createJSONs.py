@@ -48,8 +48,8 @@ def createSingleYearJSON(jerList, jecList, algosToConsider, outputName):
     os.system("rm {}.json.gz".format(outputName))
     os.system("gzip {}.json".format(outputName))
 
-    jerAK4List = list(itertools.product(jerList, ["AK4PFchs"]))
-    jecAK4List = list(itertools.product(jecList, ["AK4PFchs"]))
+    jerAK4List = list(itertools.product(jerList, [i for i in algosToConsider if "AK4PF" in i]))
+    jecAK4List = list(itertools.product(jecList, [i for i in algosToConsider if "AK4PF" in i]))
     outputNameAK4 = "{}/jet_jerc".format(outputName.split("/")[0])
     command = " ".join(["python3", "-m", "correctionlib.cli", "merge"] + ["{}_{}.json.gz".format(comp[0],comp[1]) for comp in (jerAK4List+jecAK4List)] + JERSmearJSON + [">", "{}.json".format(outputNameAK4)])
     print(command)#subprocess seems to not work with long command?
@@ -61,10 +61,10 @@ def createSingleYearJSON(jerList, jecList, algosToConsider, outputName):
     os.system("rm {}.json.gz".format(outputNameAK4))
     os.system("gzip {}.json".format(outputNameAK4))
 
-    jerAK8List = list(itertools.product(jerList, ["AK8PFPuppi"]))
+    jerAK8List = list(itertools.product(jerList, [i for i in algosToConsider if "AK8PF" in i]))
     if "2017_UL" in outputName: #manual fix as UL17_JRV2 only contains AK4PFchs SF/PtResolution
         jerAK8List = []
-    jecAK8List = list(itertools.product(jecList, ["AK8PFPuppi"]))
+    jecAK8List = list(itertools.product(jecList, [i for i in algosToConsider if "AK8PF" in i]))
     outputNameAK8 = "{}/fatJet_jerc".format(outputName.split("/")[0])
     command = " ".join(["python3", "-m", "correctionlib.cli", "merge"] + ["{}_{}.json.gz".format(comp[0],comp[1]) for comp in (jerAK8List+jecAK8List)] + JERSmearJSON + [">", "{}.json".format(outputNameAK8)])
     print(command)#subprocess seems to not work with long command?
@@ -83,6 +83,7 @@ print(JER2016preVFP,JEC2016preVFP)
 print(JER2016postVFP,JEC2016postVFP)
 print(JER2017,JEC2017)
 print(JER2018,JEC2018)
+print(JER2022,JEC2022)
 
 #JEC2016,JEC2017,JEC2018=[],[],[] 
 #JER2016,JER2017,JER2018=[],[],[] 
@@ -92,4 +93,4 @@ createSingleYearJSON(JER2016preVFP, JEC2016preVFP,  algosToConsider,"2016preVFP_
 createSingleYearJSON(JER2016postVFP,JEC2016postVFP, algosToConsider,"2016postVFP_UL/UL16postVFP_jerc")
 createSingleYearJSON(JER2017,       JEC2017,        algosToConsider,"2017_UL/UL17_jerc")
 createSingleYearJSON(JER2018,       JEC2018,        algosToConsider,"2018_UL/UL18_jerc")
-
+createSingleYearJSON(JER2022,       JEC2022,   algosToConsider_run3,"2022/Prompt22_jerc")
