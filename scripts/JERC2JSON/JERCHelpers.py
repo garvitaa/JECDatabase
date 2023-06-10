@@ -6,6 +6,8 @@ import re
 import os
 from statistics import mean, median, stdev
 
+## --------------- Run2 --------------- ##
+
 JEC2016preVFP=[
 "Summer19UL16APV_RunBCD_V7_DATA",
 "Summer19UL16APV_RunEF_V7_DATA",
@@ -53,6 +55,24 @@ algosToConsider=[
 "AK4PFchs",
 "AK8PFPuppi"
 ]
+
+## --------------- Run3 --------------- ##
+
+JEC2022=[
+"Winter22Run3_V2_MC",
+"Winter22Run3_RunC_V2_DATA",
+"Winter22Run3_RunD_V2_DATA",
+]
+
+JER2022=[
+"JR_Winter22Run3_V1_MC",
+]
+
+algosToConsider_run3=[
+"AK4PFPuppi",
+"AK8PFPuppi"
+]
+
 
 resolutionLevels = ["PtResolution",
 #                    "EtaResolution", 
